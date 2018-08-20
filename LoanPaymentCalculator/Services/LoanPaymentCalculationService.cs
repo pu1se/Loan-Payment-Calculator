@@ -19,7 +19,8 @@ namespace LoanPaymentCalculator
 
             paymentInfo.TotalInterest = paymentInfo.TotalPayment - loanInfo.LoanAmount;
 
-            return paymentInfo;
+
+            return paymentInfo.RoundPaymentResultTo(2);
         }
 
         private decimal GetMonthlyPaymentByPmtFormula(LoanEntity loanInfo)
@@ -28,9 +29,8 @@ namespace LoanPaymentCalculator
             var numberOfPaymentPeriods = loanInfo.TermInYears * 12;
             var result = (percentInDecimalFormat * loanInfo.LoanAmount) / (1 - (decimal)Math.Pow((double) (1 + percentInDecimalFormat), numberOfPaymentPeriods*-1));
 
-            result = Math.Round(result, 2);
-
             return result;
         }
+
     }
 }

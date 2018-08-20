@@ -20,5 +20,15 @@ namespace LoanPaymentCalculator
         {
             return JsonConvert.SerializeObject(this);
         }
+
+        public PaymentEntity RoundPaymentResultTo(int roundToNumber)
+        {
+            return new PaymentEntity
+            {
+                MonthlyPayment = Math.Round(MonthlyPayment, roundToNumber),
+                TotalInterest = Math.Round(TotalInterest, roundToNumber),
+                TotalPayment = Math.Round(TotalPayment, roundToNumber)
+            };
+        }
     }
 }

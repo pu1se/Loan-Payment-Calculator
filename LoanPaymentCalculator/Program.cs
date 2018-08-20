@@ -14,15 +14,8 @@ namespace LoanPaymentCalculator
 
         static void Main(string[] args)
         {
-//            var model = ReadAndValidateLoanModel();
+            var model = ReadAndValidateLoanModel();
 
-            var model = new LoanValidationModel
-            {
-                LoanAmount = "100000",
-                Percent = "5.5%",
-                DownPaymentAmount = "20000",
-                TermInYears = "30"
-            };
             var paymentEntity = Service.CalculatePayments(model.ToEntity());
 
             var json = paymentEntity.ToJson();

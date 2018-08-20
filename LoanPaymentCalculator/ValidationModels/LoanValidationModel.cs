@@ -13,24 +13,28 @@ namespace LoanPaymentCalculator
         [Display(Name = "amount")]
         [StringLength(12)]
         [RegularExpression(RegexpRepository.DecimalNumber, ErrorMessage = "The field amount must contains only numbers and dot.")]
+        [MustBeNotZero]
         public string LoanAmount { get; set; }
 
         [Required]
         [Display(Name = "interest")]
         [StringLength(8)]
         [RegularExpression(RegexpRepository.Percent, ErrorMessage = "The field interest must be a float number with % at the end. For example \"5.5%\".")]
+        [MustBeNotZero]
         public string Percent { get; set; }
 
         [Required]
         [Display(Name = "downpayment")]
         [StringLength(12)]
         [RegularExpression(RegexpRepository.DecimalNumber, ErrorMessage = "The field downpayment must contains only numbers and dot.")]
+        [MustBeLowerThanProperty("LoanAmount")]
         public string DownPaymentAmount { get; set; }
 
         [Required]
         [Display(Name = "term")]
         [StringLength(2, ErrorMessage = "Maximun term value is 99")]
         [RegularExpression(RegexpRepository.IntegerNumber, ErrorMessage = "The field term must be an integer number.")]
+        [MustBeNotZero]
         public string TermInYears { get; set; }
 
 

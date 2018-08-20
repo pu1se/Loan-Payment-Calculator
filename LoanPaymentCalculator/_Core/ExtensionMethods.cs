@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -42,6 +43,17 @@ namespace LoanPaymentCalculator
             }
 
             return (T)attribute;
+        }
+
+        public static string GetDisplayName(this MemberInfo property)
+        {
+            var displayAttr = (DisplayAttribute)property.GetCustomAttributes(typeof (DisplayAttribute), false).FirstOrDefault();
+            if (displayAttr == null)
+            {
+                return property.Name;
+            }
+
+            return displayAttr.Name;
         }
     }
 }
